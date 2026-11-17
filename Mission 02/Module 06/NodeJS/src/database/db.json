@@ -1,6 +1,1 @@
-[
-  { "id": 1, "name": "Product 1", "price": 20 },
-  { "id": 3, "name": "Product 3", "price": 40 },
-  { "id": 1794838365179, "name": "products-4", "price": 200 },
-  { "id": 1794838455518, "name": "products-5", "price": 300 }
-]
+[{"id":1,"name":"Product 1","price":20},{"id":3,"name":"Product 3","price":40},{"id":1794838365179,"name":"products-4","price":200},{"id":1794838455518,"name":"products-5","price":300},{"id":1794904610857,"name":"products-6","price":300}]

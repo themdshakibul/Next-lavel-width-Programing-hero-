@@ -35,23 +35,34 @@ const productController = async (req: IncomingMessage, res: ServerResponse) => {
       sendResponse(res, false, 500, "Internal Server Error!");
     }
   } else if (method === "POST" && url === "/products") {
-    const body = await bodyPerser(req);
-    const newProduct = {
-      id: Date.now(),
-      ...body,
-    };
+    try {
+      const body = await bodyPerser(req);
+      const newProduct = {
+        id: Date.now(),
+        ...body,
+      };
 
-    const products = productServices();
-    products.push(newProduct);
-    createProduct(products);
+      const products = productServices();
+      products.push(newProduct);
+      createProduct(products);
 
-    res.writeHead(201, { "Content-Type": "application/json" });
-    res.end(
-      JSON.stringify({
-        message: "Products Created Successfully!",
-        data: newProduct,
-      }),
-    );
+      sendResponse(
+        res,
+        true,
+        201,
+        "Products Created Successfully!",
+        newProduct,
+      );
+      // res.writeHead(201, { "Content-Type": "application/json" });
+      // res.end(
+      //   JSON.stringify({
+      //     message: "Products Created Successfully!",
+      //     data: newProduct,
+      //   }),
+      // );
+    } catch (error) {
+      sendResponse(res, false, 500, "Internal Server Error!");
+    }
   } else if (method === "PUT" && id !== null) {
     const body = await bodyPerser(req);
     const products = productServices();
