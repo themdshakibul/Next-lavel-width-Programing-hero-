@@ -15,7 +15,6 @@ app.use(express.urlencoded({ extended: true }));
 
 const pool = new Pool({
   connectionString: process.env.DATABASE_URL,
-  // "postgresql://neondb_owner:npg_xdYFQa5szK8M@ep-orange-rain-a1qfl8m3-pooler.ap-southeast-1.aws.neon.tech/neondb?sslmode=false&channel_binding=require",
 });
 
 const initBD = async () => {
@@ -66,6 +65,52 @@ app.post("/api/v1/users", async (req: Request, res: Response) => {
       message: "Users Created!",
       data: result.rows[0],
     });
+  } catch (error: any) {
+    res.status(500).json({
+      success: false,
+      message: error?.message,
+      error: error,
+    });
+  }
+});
+
+app.get("/api/v1/users", async (req: Request, res: Response) => {
+  try {
+    const result = await pool.query(`
+        SELECT * FROM users
+      `);
+
+    res.status(200).json({
+      success: true,
+      message: "Users Retrived successfully!",
+      data: result.rows,
+    });
+  } catch (error: any) {
+    res.status(500).json({
+      success: false,
+      message: error?.message,
+      error: error,
+    });
+  }
+});
+
+app.get("/api/v1/users/:id", async (req: Request, res: Response) => {
+  try {
+    const { id } = req.params;
+    const result = await pool.query(
+      `
+        SELECT * FROM users WHERE id=$1
+      `,
+      [id],
+    );
+
+    res.status(200).json({
+      success: true,
+      message: "User Retrived successfully!",
+      data: result.rows[0],
+    });
+
+    // console.log(result);
   } catch (error: any) {
     res.status(500).json({
       success: false,
