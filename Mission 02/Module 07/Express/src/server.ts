@@ -4,17 +4,16 @@ import express, {
   type Response,
 } from "express";
 import { Pool } from "pg";
-import "dotenv/config";
+import config from "./config";
 
 const app: Application = express();
-const port = process.env.PORT;
 
 app.use(express.json());
 app.use(express.text());
 app.use(express.urlencoded({ extended: true }));
 
 const pool = new Pool({
-  connectionString: process.env.DATABASE_URL,
+  connectionString: config.connection_String,
 });
 
 const initBD = async () => {
@@ -26,7 +25,7 @@ const initBD = async () => {
         email VARCHAR(255) UNIQUE NOT NULL,
         password VARCHAR(255) NOT NULL,
         age INT,
-        is_active BOOLEAN DEFAULT true,
+        is_Active BOOLEAN DEFAULT true,
         create_at TIMESTAMP DEFAULT NOW(),
         update_at TIMESTAMP DEFAULT NOW()
         );
@@ -104,6 +103,13 @@ app.get("/api/v1/users/:id", async (req: Request, res: Response) => {
       [id],
     );
 
+    if (result.rowCount === 0) {
+      res.status(404).json({
+        success: false,
+        message: "User Not Found!",
+      });
+    }
+
     res.status(200).json({
       success: true,
       message: "User Retrived successfully!",
@@ -120,6 +126,78 @@ app.get("/api/v1/users/:id", async (req: Request, res: Response) => {
   }
 });
 
-app.listen(port, () => {
-  console.log(`The Express Server is running on the prot ${port}`);
+app.put("/api/v1/users/:id", async (req: Request, res: Response) => {
+  try {
+    const { id } = req.params;
+    const { name, password, age, is_Active } = req.body;
+
+    const result = await pool.query(
+      `
+      UPDATE users
+      SET
+      name = COALESCE($1, name),
+      password = COALESCE($2, password),
+      age = COALESCE($3, age),
+      is_Active = COALESCE($4, is_Active),
+      update_at = NOW()
+      WHERE id = $5 RETURNING *
+      `,
+      [name ?? null, password ?? null, age ?? null, is_Active ?? null, id],
+    );
+
+    if (result.rowCount === 0) {
+      res.status(404).json({
+        success: false,
+        message: "User Not Found!",
+      });
+    }
+
+    res.status(200).json({
+      success: true,
+      message: "User Updated Successfully!",
+      data: result.rows[0],
+    });
+    console.log(result);
+  } catch (error: any) {
+    res.status(500).json({
+      success: false,
+      message: error?.message,
+      error: error,
+    });
+  }
+});
+
+app.delete("/api/v1/users/:id", async (req: Request, res: Response) => {
+  try {
+    const { id } = req.params;
+    const result = await pool.query(
+      `
+        DELETE FROM users WHERE id=$1
+      `,
+      [id],
+    );
+
+    if (result.rowCount === 0) {
+      res.status(404).json({
+        success: false,
+        message: "User Not Found!",
+      });
+    }
+
+    res.status(200).json({
+      success: true,
+      message: "User Deleted Successfully!",
+      // data: result.rows[0],
+    });
+  } catch (error: any) {
+    res.status(500).json({
+      success: false,
+      message: error?.message,
+      error: error,
+    });
+  }
+});
+
+app.listen(config.port, () => {
+  console.log(`The Express Server is running on the prot ${config.port}`);
 });
