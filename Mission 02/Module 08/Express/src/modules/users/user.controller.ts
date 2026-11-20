@@ -1,21 +1,13 @@
 import type { Request, Response } from "express";
-import { pool } from "../../db";
+import { userService } from "./user.service";
 
 const createUsers = async (req: Request, res: Response) => {
   try {
-    const { name, email, password, age } = req.body;
-
-    const result = await pool.query(
-      `
-      INSERT INTO users (name, email, password, age) VALUES
-      ($1, $2, $3, $4) RETURNING *
-    `,
-      [name, email, password, age],
-    );
+    const result = await userService.createUserIntoDB(req.body);
 
     res.status(201).json({
       success: true,
-      message: "Users Created!",
+      message: "Users Created!!",
       data: result.rows[0],
     });
   } catch (error: any) {
@@ -30,5 +22,5 @@ const createUsers = async (req: Request, res: Response) => {
 
 
 export const userController = {
-    createUsers
-}
+  createUsers,
+};
