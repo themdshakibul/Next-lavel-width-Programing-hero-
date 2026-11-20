@@ -11,6 +11,8 @@ app.use(express.json());
 app.use(express.text());
 app.use(express.urlencoded({ extended: true }));
 
+app.use("/api/v1/users", userRoute);
+
 app.get("/", (req: Request, res: Response) => {
   res.status(200).json({
     success: true,
@@ -18,7 +20,5 @@ app.get("/", (req: Request, res: Response) => {
     author: "Shakibul",
   });
 });
-
-app.use("/api/v1/users", userRoute);
 
 export default app;
