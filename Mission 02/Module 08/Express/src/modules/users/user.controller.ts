@@ -1,6 +1,5 @@
 import type { Request, Response } from "express";
 import { userService } from "./user.service";
-import { strict } from "assert";
 
 const createUsers = async (req: Request, res: Response) => {
   try {
