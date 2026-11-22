@@ -1,5 +1,7 @@
 import bcrypt from "bcryptjs";
 import { pool } from "../../db";
+import jwt from "jsonwebtoken";
+import config from "../../config";
 
 const loginUserIntoDB = async (payload: {
   email: string;
@@ -7,7 +9,7 @@ const loginUserIntoDB = async (payload: {
 }) => {
   //Todo: Check if the user exist -> Done
   //Todo: Check if the password match -> Done
-  //Todo: Check the user status
+  //Todo: Check the user status -> Done
   //Todo: If pass all then generate jwt token
 
   const { email, password } = payload;
@@ -27,6 +29,23 @@ const loginUserIntoDB = async (payload: {
   if (!matchPassword) {
     throw new Error("Invalid credentials!!");
   }
+  if (!user.rows[0].is_active) {
+    throw new Error("Access denied!!");
+  }
+
+  const jwtPayload = {
+    id: user.rows[0].id,
+    name: user.rows[0].name,
+    email: user.rows[0].email,
+  };
+
+  const accessToken = jwt.sign(jwtPayload, config.JwtSecreate, {
+    expiresIn: "1d",
+  });
+
+  const { password: _password, ...safeUser } = user.rows[0];
+
+  return { accessToken, user: safeUser };
 };
 
 export const authService = {

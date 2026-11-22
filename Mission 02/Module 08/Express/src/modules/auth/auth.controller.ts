@@ -5,10 +5,11 @@ const loginUser = async (req: Request, res: Response) => {
   try {
     const result = await authService.loginUserIntoDB(req.body);
 
-    // res.status(201).json({
-    //   success: true,
-    //   message: "Profile Created Successfully!",
-    // });
+    res.status(201).json({
+      success: true,
+      message: "Usear login Successfully!",
+      data: result,
+    });
   } catch (error: any) {
     res.status(500).json({
       success: false,
