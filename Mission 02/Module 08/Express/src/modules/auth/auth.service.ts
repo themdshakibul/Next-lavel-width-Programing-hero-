@@ -10,7 +10,7 @@ const loginUserIntoDB = async (payload: {
   //Todo: Check if the user exist -> Done
   //Todo: Check if the password match -> Done
   //Todo: Check the user status -> Done
-  //Todo: If pass all then generate jwt token
+  //Todo: If pass all then generate jwt token -> Done
 
   const { email, password } = payload;
 
@@ -44,7 +44,6 @@ const loginUserIntoDB = async (payload: {
   });
 
   const { password: _password, ...safeUser } = user.rows[0];
-
   return { accessToken, user: safeUser };
 };
 
