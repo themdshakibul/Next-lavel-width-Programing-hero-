@@ -20,7 +20,7 @@ const createUsers = async (req: Request, res: Response) => {
 };
 
 const getAllUsers = async (req: Request, res: Response) => {
-  // console.log("From Controller", req.user);
+  console.log("From Controller", req.user);
   try {
     const result = await userService.getAllUsersFormDB();
 
@@ -81,7 +81,6 @@ const updateUser = async (req: Request, res: Response) => {
       message: "User Updated Successfully!",
       data: result.rows[0],
     });
-    console.log(result);
   } catch (error: any) {
     res.status(500).json({
       success: false,

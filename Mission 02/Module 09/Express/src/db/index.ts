@@ -15,6 +15,7 @@ export const initBD = async () => {
         password VARCHAR(255) NOT NULL,
         age INT,
         is_Active BOOLEAN DEFAULT true,
+        role VARCHAR(20) DEFAULT 'user',
         create_at TIMESTAMP DEFAULT NOW(),
         update_at TIMESTAMP DEFAULT NOW()
         );
@@ -24,7 +25,7 @@ export const initBD = async () => {
         CREATE TABLE IF NOT EXISTS profile(
         id SERIAL PRIMARY KEY,
         user_id INT UNIQUE REFERENCES users(id) ON DELETE CASCADE,
-      
+
         bio TEXT,
         address TEXT,
         phone VARCHAR(15),
