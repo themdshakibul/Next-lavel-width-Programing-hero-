@@ -1,3 +1,75 @@
 Method: GET | URL: / | 1795367289059
 Method: GET | URL: /api/v1/users | 1795367202574
 Method: GET | URL: /api/v1/users/2 | 1795367407445
+
+Method: GET | URL: / | 1795409132183
+
+Method: GET | URL: /favicon.ico | 1795409132750
+
+Method: GET | URL: /api/v1/profile | 1795409141644
+
+Method: GET | URL: /api/v1/users | 1795409461198
+
+Method: GET | URL: /api/v1/users | 1795409592373
+
+Method: GET | URL: /api/v1/users | 1795411125402
+
+Method: POST | URL: /api/v1/auth/login | 1795411190304
+
+Method: GET | URL: /api/v1/users | 1795411249979
+
+Method: GET | URL: /api/v1/users | 1795411323107
+
+Method: GET | URL: /api/v1/users | 1795411345931
+
+Method: GET | URL: /api/v1/users | 1795411941271
+
+Method: GET | URL: /api/v1/users | 1795411947144
+
+Method: GET | URL: /api/v1/users | 1795412137284
+
+Method: GET | URL: /api/v1/users | 1795412402556
+
+Method: GET | URL: /api/v1/users | 1795413014549
+
+Method: GET | URL: /api/v1/users | 1795413029448
+
+Method: GET | URL: /api/v1/users | 1795413040045
+
+Method: GET | URL: /api/v1/users | 1795413096078
+
+Method: GET | URL: /api/v1/users | 1795413115661
+
+Method: GET | URL: /api/v1/users | 1795425326087
+
+Method: GET | URL: /api/v1/users | 1795425345849
+
+Method: GET | URL: /api/v1/users | 1795425369087
+
+Method: GET | URL: /api/v1/users | 1795425396212
+
+Method: GET | URL: /api/v1/users | 1795425409514
+
+Method: GET | URL: /api/v1/users | 1795425458384
+
+Method: GET | URL: /api/v1/users | 1795425500331
+
+Method: GET | URL: /api/v1/users | 1795425537958
+
+Method: GET | URL: /api/v1/users | 1795447537250
+
+Method: GET | URL: /api/v1/users | 1795448418742
+
+Method: GET | URL: /api/v1/users | 1795448542054
+
+Method: GET | URL: /api/v1/users | 1795448580560
+
+Method: GET | URL: /api/v1/users | 1795448602882
+
+Method: GET | URL: /api/v1/users | 1795448828344
+
+Method: GET | URL: /api/v1/users | 1795449302984
+
+Method: GET | URL: /favicon.ico | 1795449304193
+
+Method: GET | URL: /api/v1/users | 1795449323482

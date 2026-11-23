@@ -20,6 +20,7 @@ const createUsers = async (req: Request, res: Response) => {
 };
 
 const getAllUsers = async (req: Request, res: Response) => {
+  // console.log("From Controller", req.user);
   try {
     const result = await userService.getAllUsersFormDB();
 
