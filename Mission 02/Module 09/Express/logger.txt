@@ -163,3 +163,23 @@ Method: GET | URL: /api/v1/users | 1795576592843
 Method: GET | URL: /api/v1/users | 1795576911960
 
 Method: GET | URL: /api/v1/users | 1795576939640
+
+Method: POST | URL: /api/v1/auth/login | 1795578348152
+
+Method: POST | URL: /api/v1/auth/login | 1795579799539
+
+Method: POST | URL: /api/v1/auth/login | 1795579894778
+
+Method: POST | URL: /api/v1/auth/login | 1795579931978
+
+Method: POST | URL: /api/v1/users | 1795580005320
+
+Method: POST | URL: /api/v1/auth/login | 1795580038457
+
+Method: POST | URL: /api/v1/auth/login | 1795580057610
+
+Method: POST | URL: /api/v1/auth/login | 1795580094854
+
+Method: POST | URL: /api/v1/auth/login | 1795580146003
+
+Method: POST | URL: /api/v1/auth/login | 1795580321174
